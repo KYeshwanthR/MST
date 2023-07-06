@@ -28,12 +28,12 @@
         class Employee extends Person {
             constructor(name, age, role, contact) {
                 super(name, age);
-                this.roll = role;
+                this.role = role;
                 this.contact = contact;
             }
 
             getdetails() {
-                return this.det() + "<br>" + "Role:" + this.roll + "<br>" + "Contact:" + this.contact;
+                return this.det() + "<br>" + "Role:" + this.role + "<br>" + "Contact:" + this.contact;
             }
         }
 
