@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicketBooking</title>
+</head>
+
+<body bgcolor="cadetblue">
+    <h1>Online Ticket booking</h1>
+    <h4>Book your tickets now</h4>
+    <input type="button" value="BOOK TICKETS" onclick="fun()">
+    <p id="id1"></p>
+    <p id="id2"></p>
+    <p id="id3"></p>
+    <script>
+        const fun = () => {
+            const numOfTickets = prompt("Enter the number of tickets");
+            if (numOfTickets < 6) {
+                document.getElementById("id1").innerHTML = "Total amount you need to pay:";
+                document.getElementById("id2").innerHTML = "Rs." + calculateCost(numOfTickets);
+                document.getElementById("id3").innerHTML = "Discount Amount is Rs." + calculateDiscount(numOfTickets);
+            } else {
+                document.getElementById("id1").innerHTML = "Sorry! you can book up to 5 tickets only online!!";
+            }
+        };
+
+        const ticketPrice = 150;
+        const calculateCost = (numOfTickets) => {
+            let totalCost = 0;
+            let discountRate = 0.03;
+            if (numOfTickets > 2 && numOfTickets < 6) {
+                for (let i = 1; i <= numOfTickets; i++) {
+                    const discountedPrice = ticketPrice - ticketPrice * discountRate;
+                    totalCost += discountedPrice;
+                    discountRate += 0.02;
+                }
+            } else if (numOfTickets <= 2) {
+                totalCost = ticketPrice * numOfTickets;
+            }
+            return totalCost;
+        };
+
+        const calculateDiscount = (numOfTickets) => {
+            const totalCost = calculateCost(numOfTickets);
+            const totalTicketPrice = numOfTickets * ticketPrice;
+            return totalTicketPrice - totalCost;
+        };
+    </script>
+</body>
+
+</html>

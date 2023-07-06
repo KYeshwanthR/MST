@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Online bookings</h1>
+    <script>
+        n = window.prompt("Enter number of tickets55:");
+        if (n <= 2) {
+            tcost = n * 150
+            document.write("For n tickets,you need to pay :", tcost);
+        }
+        else if (n >= 6) {
+            document.write("Bookings are not Allowed");
+        }
+        else {
+            tcost = 0;
+            for (let i = 1; i <= n; i++) {
+                let discount = i * 2;
+                tcost += 150 - (150 * (discount / 100));
+            }
+            document.write("For", n, "tickets, you need to pay:", tcost, " instead of ", (150 * n), " with discounts");
+        }
+    </script>
+</body>
+</html>

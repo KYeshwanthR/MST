@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopTime</title>
+</head>
+<body bgcolor="cadetblue">
+    <h1 align="center">ShopTime</h1>
+    Enter number of ticket: 
+    <input id="number" type="text">
+    <br>
+    <button onclick="m()">Calculate Cost</button>
+    <p id="cost"></p>
+    
+    <script>
+        function total(a){
+            actualcost = a * 150;
+            discount = actualcost/10;
+            afterdisc = actualcost - discount * actualcost;
+            return afterdisc;
+        }
+
+        function m() {
+            num = document.getElementById("number").value;
+            finalcost = total(num);
+            document.getElementById("cost").innerHTML = finalcost;
+        }
+    </script>
+</body>
+</html>
