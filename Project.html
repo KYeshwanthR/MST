@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Bookstore</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Online Bookstore</h1>
+  <div class="navbar">
+    <button class="menu-button">Menu</button>
+    <div class="search-container">
+      <input type="text" placeholder="Search...">
+      <button class="search-button">Search</button>
+    </div>
+  </div>
+  <div id="bookstore">
+    <h2>Books Available</h2>
+    <div id="books" class="grid-container">
+      <!-- Book list will be dynamically added here -->
+    </div>
+    <h2>Shopping Cart</h2>
+    <div id="cart" class="grid-container">
+      <!-- Shopping cart will be dynamically updated here -->
+    </div>
+  </div>
+
+  <script>
+    // Sample book data
+    const books = [
+      { title: "Book 1", author: "Author 1", price: 10.99, image: "https://www.blackgate.com/wp-content/uploads/2018/04/The-Collectors-Book-of-Science-Fiction.jpg" },
+      { title: "Book 2", author: "Author 2", price: 15.99, image: "https://www.giantfreakinrobot.com/wp-content/uploads/2019/11/agent.jpg" },
+      { title: "Book 3", author: "Author 3", price: 12.49, image: "https://i.pinimg.com/originals/dd/a5/ba/dda5ba79b078f466b5b38ea750eabe38.jpg" },
+      { title: "Book 4", author: "Author 4", price: 9.99, image: "https://i.pinimg.com/originals/49/ed/e5/49ede50560681c25baf9dac5c5a69ed9.jpg" },
+      // Add more books with images here
+      { title: "Your Book Title 1", author: "Author 1", price: 12.99, image: "https://imaginationsoup.net/wp-content/uploads/2020/05/Finn-and-the-Intergalactic-Lunchbox-1356x2048.jpg" },
+      { title: "Your Book Title 2", author: "Author 2", price: 9.49, image: "https://www.blackgate.com/wp-content/uploads/2020/11/Escape-Pod-The-Science-Fiction-Anthology.jpg" },
+      // Add more books with images here
+    ];
+
+    // Initialize the cart
+    let cartItems = [];
+
+    // Function to render the books
+    function renderBooks() {
+      const booksContainer = document.getElementById("books");
+      booksContainer.innerHTML = "";
+
+      books.forEach((book, index) => {
+        const bookElement = document.createElement("div");
+        bookElement.classList.add("book");
+        bookElement.innerHTML = `
+          <img src="${book.image}" alt="${book.title}">
+          <span>${book.title} - ${book.author} ($${book.price.toFixed(2)})</span>
+          <button onclick="addToCart(${index})">Add to Cart</button>
+        `;
+        booksContainer.appendChild(bookElement);
+      });
+    }
+
+    // Function to render the shopping cart
+    function renderCart() {
+      const cartContainer = document.getElementById("cart");
+      cartContainer.innerHTML = "";
+
+      cartItems.forEach((item, index) => {
+        const cartItemElement = document.createElement("div");
+        cartItemElement.classList.add("cart-item");
+        cartItemElement.innerHTML = `
+          <span>${item.title} - ${item.author} ($${item.price.toFixed(2)})</span>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartContainer.appendChild(cartItemElement);
+      });
+    }
+
+    // Function to add a book to the cart
+    function addToCart(bookIndex) {
+      const selectedBook = books[bookIndex];
+      cartItems.push(selectedBook);
+      renderCart();
+    }
+
+    // Function to remove a book from the cart
+    function removeFromCart(cartIndex) {
+      cartItems.splice(cartIndex, 1);
+      renderCart();
+    }
+
+    // Initial rendering
+    renderBooks();
+    renderCart();
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      margin: 20px 0;
+    }
+
+    #bookstore {
+      display: flex;
+      flex-direction: column;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .menu-button,
+    .search-button {
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 3px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-container input[type="text"] {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      margin-right: 10px;
+    }
+
+    .menu-button:hover,
+    .search-button:hover {
+      background-color: #0056b3;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .book {
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #315d9e;
+    border-radius: 5px;
+    background-color: #3d77c2;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    justify-content: flex-end;
+}
+
+    .book img {
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .book button {
+      cursor: pointer;
+      background-color: #91c1f5;
+      color: #fafafa;
+      border: 2px;
+      border-color: #662323;
+      padding: 8px 15px;
+      border-radius: 3px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .book button:hover {
+      background-color: #0056b3;
+    }
+
+    #cart {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-item button {
+      cursor: pointer;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 3px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .cart-item button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</body>
+</html>
